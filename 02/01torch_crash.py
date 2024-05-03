@@ -39,3 +39,8 @@ x_numpy = np.array([[1,2,3],[4,5,6]])
 y_torch = torch.tensor(x_numpy)
 x_numpy_2 = np.array(y_torch)
 print(type(x_numpy),type(y_torch),type(x_numpy_2))
+
+x_randn10 = torch.randn(2,2,5)
+print(x_randn10)
+
+
