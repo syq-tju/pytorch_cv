@@ -2,7 +2,7 @@ import torch
 import timeit
 
 # 准备数据
-x = torch.rand(1, 64000)
+x = torch.rand(10, 64000)
 y = torch.rand(64000, 10240)
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 x_cuda = x.to(device)
@@ -21,9 +21,10 @@ def matmul_cpu():
 cuda_time = timeit.timeit("matmul_cuda()", globals=globals(), number=10)
 cpu_time = timeit.timeit("matmul_cpu()", globals=globals(), number=10)
 
-print(f"CUDA 计算时间: {cuda_time / 10} 秒")
+print(f"CUDA 计算时间: {cuda_time / 10} 秒")        
 print(f"CPU 计算时间: {cpu_time / 10} 秒")
 
-#982 µs ± 55.4 ns per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-#20.2 ms ± 260 µs per loop (mean ± std. dev. of 7 runs, 10 loops each)
+#CUDA 计算时间: 0.002890710400004082 秒
+#CPU 计算时间: 0.1175481139999988 秒
+
 
