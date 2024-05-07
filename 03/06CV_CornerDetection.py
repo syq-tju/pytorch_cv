@@ -2,19 +2,23 @@ import cv2
 import numpy as np
 
 # Load the image
-img = cv2.imread("06.jpeg")
-img = cv2.resize(img, (0, 0), fx=4, fy=4)  # Resize the image
+img = cv2.imread("0606.jpeg")
+img = cv2.resize(img, (0, 0), fx=2, fy=2)  # Resize the image
+
+# Crop the image 
+img = img[150:img.shape[0] - 150, 150:img.shape[1] - 150]  # Crop the image to remove the white border
+
 color_img = img.copy()  # Make a copy of the original image to keep it in color
 gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  # Convert to grayscale for corner detection
 
 # Detect corners
-corners = cv2.goodFeaturesToTrack(gray_img, 100, 0.1, 20)
-corners = np.int0(corners)
+corners = cv2.goodFeaturesToTrack(gray_img, 100, 0.01, 58)   # Detect 100 corners with a minimum distance of 10 pixels and quality level of 0.01
+corners = np.int0(corners)                                  # Convert the corners to integers
 
 # Draw circles at each corner on the color image
 for corner in corners:
     x, y = corner.ravel()
-    cv2.circle(color_img, (x, y), 5, (255, 0, 0), -1)  # Draw blue circles for visibility
+    cv2.circle(color_img, (x, y), 15, (255, 0, 0), -1)  # Draw blue circles for visibility
 
 # Draw lines between each corner on the color image
 for i in range(len(corners)):
